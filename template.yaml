@@ -1,0 +1,24 @@
+# This is the template for a new user configuration file.
+# The tool will prompt for each setting.
+
+general:
+  # Do you want to enable debug logging? (true/false)
+  debug_logging: false
+  # What is your API key? (string)
+  api_key: ""
+  # How many concurrent threads should be used? (integer)
+  threads: 4
+
+services:
+  # Which services should be enabled? (multiselect)
+  # Possible options are: "web_server", "database", "message_queue", "caching_layer"
+  enabled_services:
+    - web_server
+    - database
+
+  # This is a nested group for database configuration.
+  database:
+    # What is the database host?
+    host: localhost
+    # What is the database port?
+    port: 5432

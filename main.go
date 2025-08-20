@@ -2,6 +2,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -44,15 +45,39 @@ services:
 // A map to hold the configuration data. `interface{}` allows for any YAML type.
 type Config map[string]interface{}
 
+// loadTemplateBytes decides which template to use (external file or internal fallback),
+// reads it, and returns its content as a byte slice.
+func loadTemplateBytes(templatePath string) ([]byte, error) {
+	if templatePath != "" {
+		// If a template path is provided, read the file.
+		return ioutil.ReadFile(templatePath)
+	}
+	// Otherwise, use the embedded template.
+	return []byte(templateYAML), nil
+}
+
 // main function to run the CLI tool.
 func main() {
+	// Define and parse command-line flags.
+	var templatePath string
+	flag.StringVar(&templatePath, "template", "", "Path to a custom YAML template file.")
+	flag.StringVar(&templatePath, "t", "", "Path to a custom YAML template file (shorthand).")
+	flag.Parse()
+
 	fmt.Println("Welcome to the Interactive YAML Configurator!")
 	fmt.Println("--------------------------------------------")
 	fmt.Println("I will guide you through creating a user-config.yaml file.")
 
-	// Unmarshal the template YAML string into a Go map.
+	// Load the template content using the new testable function.
+	yamlTemplateContent, err := loadTemplateBytes(templatePath)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error loading template: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Unmarshal the template YAML into a Go map.
 	var templateConfig Config
-	err := yaml.Unmarshal([]byte(templateYAML), &templateConfig)
+	err = yaml.Unmarshal(yamlTemplateContent, &templateConfig)
 	if err != nil {
 		fmt.Printf("Error parsing template YAML: %v\n", err)
 		os.Exit(1)
