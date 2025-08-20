@@ -28,8 +28,12 @@ changelog:
 release:
   prerelease: auto
 sboms:
-  - artifacts: archive
-  - artifacts: binary
+  - id: sbom_archives
+    artifacts: archive
+  - id: sbom_binaries
+    artifacts: binary
 attestations:
-  - artifacts: archive
-  - artifacts: binary
+  - id: attestation_archives
+    artifacts: archive
+  - id: attestation_binaries
+    artifacts: binary
