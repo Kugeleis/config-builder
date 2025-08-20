@@ -31,3 +31,16 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
+
+release:
+  prerelease: auto
+
+sboms:
+  - artifacts:
+      - archive
+      - binary
+
+attestations:
+  - artifacts:
+      - archive
+      - binary
