@@ -28,7 +28,6 @@ snapshot:
 changelog:
   sort: asc
   filters:
-    first_parent: true
     exclude:
       - '^docs:'
       - '^test:'
