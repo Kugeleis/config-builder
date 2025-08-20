@@ -11,6 +11,12 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+var (
+	version = "dev"
+	commit  = "none"
+	date    = "unknown"
+)
+
 // This is our template YAML content, embedded directly in the Go code
 // to make the example fully self-contained. In a real-world application,
 // you would load this from a file.
@@ -64,6 +70,7 @@ func main() {
 	flag.StringVar(&templatePath, "t", "", "Path to a custom YAML template file (shorthand).")
 	flag.Parse()
 
+	fmt.Printf("config-builder version: %s, commit: %s, built at: %s\n", version, commit, date)
 	fmt.Println("Welcome to the Interactive YAML Configurator!")
 	fmt.Println("--------------------------------------------")
 	fmt.Println("I will guide you through creating a user-config.yaml file.")
