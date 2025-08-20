@@ -25,5 +25,7 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
+upx:
+  - enabled: true
 release:
   prerelease: auto
