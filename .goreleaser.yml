@@ -27,13 +27,3 @@ changelog:
       - '^test:'
 release:
   prerelease: auto
-sboms:
-  - id: sbom_archives
-    artifacts: archive
-  - id: sbom_binaries
-    artifacts: binary
-attestations:
-  - id: attestation_archives
-    artifacts: archive
-  - id: attestation_binaries
-    artifacts: binary
