@@ -65,10 +65,30 @@ func loadTemplateBytes(templatePath string) ([]byte, error) {
 // main function to run the CLI tool.
 func main() {
 	// Define and parse command-line flags.
-	var templatePath string
+	var templatePath, outputPath string
+	var showHelp bool
 	flag.StringVar(&templatePath, "template", "", "Path to a custom YAML template file.")
 	flag.StringVar(&templatePath, "t", "", "Path to a custom YAML template file (shorthand).")
+	flag.StringVar(&outputPath, "output", "user-config.yaml", "Path to the output YAML file.")
+	flag.StringVar(&outputPath, "o", "user-config.yaml", "Path to the output YAML file (shorthand).")
+	flag.BoolVar(&showHelp, "help", false, "Show help message.")
+	flag.BoolVar(&showHelp, "h", false, "Show help message (shorthand).")
+
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Usage: %s [options]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "config-builder version: %s, commit: %s, built at: %s\n\n", version, commit, date)
+		fmt.Fprintf(os.Stderr, "Options:\n")
+		fmt.Fprintf(os.Stderr, "  -t, --template <path>  Path to a custom YAML template file.\n")
+		fmt.Fprintf(os.Stderr, "  -o, --output <path>    Path to the output YAML file (default: \"user-config.yaml\").\n")
+		fmt.Fprintf(os.Stderr, "  -h, --help             Show this help message.\n")
+	}
+
 	flag.Parse()
+
+	if showHelp {
+		flag.Usage()
+		os.Exit(0)
+	}
 
 	fmt.Printf("config-builder version: %s, commit: %s, built at: %s\n", version, commit, date)
 	fmt.Println("Welcome to the Interactive YAML Configurator!")
@@ -104,14 +124,14 @@ func main() {
 	}
 
 	// Write the final YAML to a file.
-	err = ioutil.WriteFile("user-config.yaml", outputYAML, 0644)
+	err = ioutil.WriteFile(outputPath, outputYAML, 0644)
 	if err != nil {
 		fmt.Printf("Error writing file: %v\n", err)
 		os.Exit(1)
 	}
 
 	fmt.Println("\n--------------------------------------------")
-	fmt.Println("Configuration complete! The file 'user-config.yaml' has been created.")
+	fmt.Printf("Configuration complete! The file '%s' has been created.\n", outputPath)
 }
 
 // processConfig is a recursive function to walk the template map.
