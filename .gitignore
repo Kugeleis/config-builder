@@ -1,0 +1,34 @@
+# Compiled binaries
+config-builder
+*.exe
+
+# Build artifacts directory from GoReleaser
+dist/
+
+# Test binaries
+*.test
+
+# Coverage profiles
+*.out
+*.cover
+
+# Log files
+*.log
+
+# Generated YAML config files from running the tool
+user-config.yaml
+custom-config.yaml
+
+# Dependency directory (Go modules are preferred)
+# vendor/
+
+# Go workspace files
+go.work
+go.work.sum
+
+# Editor-specific files and directories
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
