@@ -1,4 +1,4 @@
-# Go YAML Configurator CLI
+# YAML Configurator CLI
 
 This is a simple, interactive command-line interface (CLI) tool written in Go that guides a user through the creation of a YAML configuration file based on a template. It simplifies the setup process for end-users by prompting them for each required value.
 
@@ -6,11 +6,18 @@ This is a simple, interactive command-line interface (CLI) tool written in Go th
 
 ### Installation
 
-You can download the latest pre-compiled binary for your operating system from this project's **GitHub Releases** page.
+You can download the latest pre-compiled binary for your operating system from this project's [**GitHub Releases**](https://github.com/Kugeleis/config-builder/releases) page.
 
 ### Usage
 
-Once downloaded, you can run the tool from your terminal.
+Once downloaded, open a terminal, navigate to the executable path you just downloaded and run the tool from your terminal. 
+
+**Note for Linux & macOS users:** After downloading, you will need to make the binary executable.
+```bash
+chmod +x ./config-builder
+```
+On macOS, you may also need to bypass a security warning the first time you run it. To do this, **right-click** the downloaded file and select **"Open"**.
+
 
 ```bash
 # Run with the default embedded template
